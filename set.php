@@ -1,5 +1,6 @@
 <?php
-
+# /var/www/project_dev/web
+# /var/www/project_master/web
 $branch = 'master';
 if (isset($_GET['branch']))
 {
