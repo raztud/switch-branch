@@ -1,0 +1,24 @@
+upstream finalbranch {
+        server          127.0.0.1:8888;
+}
+ 
+map  $cookie_branch     $branch {
+        default         finalbranch;
+        master          127.0.0.1:8888;
+}
+ 
+map $cookie_branch      $everything {
+        default         127.0.0.1:8888;
+        dev             127.0.0.1:8080;
+}
+ 
+server {
+        index index.php; 
+        location = / {
+                proxy_pass              http://$branch;
+        }
+ 
+        location / {
+                proxy_pass              http://$everything;
+        }
+}
